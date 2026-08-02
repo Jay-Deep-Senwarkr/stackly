@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import { CometCard } from "@/components/ui/comet-card";
 
 const projects = [
@@ -12,7 +10,6 @@ const projects = [
       "A hub for developers to discover hackathons, meetups, and conferences in one place.",
     image:
       "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop",
-    link: "#",
   },
   {
     title: "Podcaster",
@@ -21,7 +18,6 @@ const projects = [
       "A modern podcasting platform built for creators who want their content to look as good as it sounds.",
     image:
       "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=1200&auto=format&fit=crop",
-    link: "#",
   },
   {
     title: "Gym Site",
@@ -30,7 +26,6 @@ const projects = [
       "A fitness brand website designed to convert visitors into members with strong CTAs.",
     image:
       "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200&auto=format&fit=crop",
-    link: "#",
   },
 ];
 
@@ -38,28 +33,26 @@ export default function WorkPreview() {
   return (
     <section className="min-h-screen bg-[#1e2a38] py-24">
       <div className="mx-auto max-w-7xl px-6">
-        {/* Header */}
         <div className="mx-auto mb-20 max-w-3xl text-center">
           <span className="inline-block rounded-full border border-[#8899aa]/20 bg-[#0d1b2a]/60 px-4 py-2 text-sm font-medium text-[#c9a84c]">
             Recent Work
           </span>
 
           <h2 className="mt-6 text-4xl font-bold text-[#f5f0e8] md:text-5xl">
-            A few things we've built
+            A few things we&apos;ve built
           </h2>
 
           <p className="mt-6 text-lg text-[#8899aa]">
-            A mix of platforms, products, and business websites — all built with
+            A mix of platforms, products, and business websites - all built with
             performance, usability, and growth in mind.
           </p>
         </div>
 
-        {/* Projects */}
         <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-3">
           {projects.map((project) => (
             <CometCard key={project.title}>
               <div className="group flex h-full flex-col rounded-3xl border border-[#8899aa]/10 bg-[#0d1b2a] p-4">
-                 <div className="relative overflow-hidden rounded-2xl">
+                <div className="relative overflow-hidden rounded-2xl">
                   <img
                     src={project.image}
                     alt={project.title}
@@ -79,29 +72,11 @@ export default function WorkPreview() {
                   <p className="mt-4 flex-1 leading-relaxed text-[#8899aa]">
                     {project.description}
                   </p>
-
-                  {/* <Link
-                    href={project.link}
-                    className="mt-6 inline-flex items-center gap-2 text-[#c9a84c] transition hover:gap-3"
-                  >
-                    View Project
-                    <ArrowUpRight size={18} />
-                  </Link> */}
                 </div>
               </div>
             </CometCard>
           ))}
         </div>
-
-        {/* Bottom CTA */}
-        {/* <div className="mt-20 text-center">
-          <Link
-            href="/work"
-            className="inline-flex items-center rounded-full border border-[#c9a84c] px-8 py-4 font-medium text-[#c9a84c] transition hover:bg-[#c9a84c] hover:text-[#0d1b2a]"
-          >
-            View All Projects
-          </Link>
-        </div> */}
       </div>
     </section>
   );

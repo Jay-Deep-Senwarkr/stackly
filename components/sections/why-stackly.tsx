@@ -1,6 +1,6 @@
 "use client";
 
-import { MessageSquare, Building2, LifeBuoy } from "lucide-react";
+import { Building2, LifeBuoy, MessageSquare } from "lucide-react";
 
 const reasons = [
   {
@@ -25,9 +25,8 @@ const reasons = [
 
 export default function WhyStackly() {
   return (
-    <section className="min-h-screen bg-[#1e2a38] flex items-center py-24">
+    <section className="flex min-h-screen items-center bg-[#1e2a38] py-24">
       <div className="mx-auto w-full max-w-7xl px-6">
-        {/* Header */}
         <div className="mx-auto mb-20 max-w-3xl text-center">
           <span className="inline-block rounded-full border border-[#8899aa]/20 bg-[#0d1b2a]/60 px-4 py-2 text-sm font-medium text-[#c9a84c]">
             Why Stackly
@@ -44,7 +43,6 @@ export default function WhyStackly() {
           </p>
         </div>
 
-        {/* Cards */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {reasons.map((reason) => {
             const Icon = reason.icon;
@@ -70,10 +68,9 @@ export default function WhyStackly() {
           })}
         </div>
 
-        {/* Bottom Trust Line */}
         <div className="mt-20 text-center">
-          <p className="text-sm tracking-[0.3em] uppercase text-[#8899aa]">
-            Clean Design • Fast Development • Long-Term Support
+          <p className="text-sm uppercase tracking-[0.3em] text-[#8899aa]">
+            Clean Design / Fast Development / Long-Term Support
           </p>
         </div>
       </div>

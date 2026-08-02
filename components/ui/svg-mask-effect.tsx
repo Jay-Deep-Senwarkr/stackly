@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useRef, useState } from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
@@ -17,29 +17,22 @@ export const MaskContainer = ({
   className?: string;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [mousePosition, setMousePosition] = useState<any>({ x: null, y: null });
-  const containerRef = useRef<any>(null);
-  const updateMousePosition = (e: any) => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
+  const updateMousePosition = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!containerRef.current) {
+      return;
+    }
+
     const rect = containerRef.current.getBoundingClientRect();
     setMousePosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
   };
-
-  useEffect(() => {
-    containerRef.current.addEventListener("mousemove", updateMousePosition);
-    return () => {
-      if (containerRef.current) {
-        containerRef.current.removeEventListener(
-          "mousemove",
-          updateMousePosition,
-        );
-      }
-    };
-  }, []);
-  let maskSize = isHovered ? revealSize : size;
+  const maskSize = isHovered ? revealSize : size;
 
   return (
     <motion.div
       ref={containerRef}
+      onMouseMove={updateMousePosition}
       className={cn("relative h-screen", className)}
       animate={{
         backgroundColor: isHovered ? "var(--slate-900)" : "var(--white)",
