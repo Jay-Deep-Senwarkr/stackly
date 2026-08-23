@@ -7,11 +7,11 @@ import {
   Clock,
   Loader2,
   Mail,
-  MessageSquareText,
   Send,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Stamp } from "@/components/ui/receipt";
 
 type FormState = {
   name: string;
@@ -34,23 +34,26 @@ const initialFormState: FormState = {
 };
 
 const industries = [
-  "Restaurant / Cafe",
-  "Fitness / Wellness",
-  "Retail / Ecommerce",
-  "Professional Services",
-  "Education",
-  "Real Estate",
-  "Healthcare",
+  "Fashion & Apparel",
+  "Beauty & Skincare",
+  "Home & Living",
+  "Food & Beverage / DTC",
+  "Jewelry & Accessories",
+  "Electronics & Gadgets",
+  "Health & Wellness",
   "Other",
 ];
 
 const budgets = [
-  "Under $1,000",
-  "$1,000 - $3,000",
-  "$3,000 - $7,500",
-  "$7,500+",
+  "Under $2,000",
+  "$2,000 - $5,000",
+  "$5,000 - $10,000",
+  "$10,000+",
   "Not sure yet",
 ];
+
+const inputClasses =
+  "h-11 w-full rounded-sm border border-ink/20 bg-white px-4 text-sm text-ink shadow-input placeholder:text-graphite/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink";
 
 export default function ContactPage() {
   const [form, setForm] = useState<FormState>(initialFormState);
@@ -97,38 +100,42 @@ export default function ContactPage() {
   const isSending = status === "sending";
 
   return (
-    <main className="min-h-screen bg-[#0d1b2a] pt-28 text-[#f5f0e8]">
-      <section className="mx-auto grid max-w-7xl gap-12 px-6 pb-24 pt-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+    <main className="min-h-screen pb-28 pt-40">
+      <section className="mx-auto grid max-w-6xl gap-14 px-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
         <div>
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#c9a84c]/30 bg-[#c9a84c]/10 px-4 py-2 text-sm font-medium text-[#c9a84c]">
-            <MessageSquareText className="h-4 w-4" />
-            Contact Stackly
-          </span>
-
-          <h1 className="mt-8 max-w-2xl text-4xl font-bold tracking-tight md:text-6xl">
-            Tell us what your business needs next.
-          </h1>
-
-          <p className="mt-6 max-w-xl text-base leading-8 text-[#aab6c3] md:text-lg">
-            Share the basics and we will help shape the right website, app, or
-            digital system for your next move.
+          <p className="font-mono text-[11px] font-bold tracking-[0.3em] text-graphite uppercase">
+            Free store audit
           </p>
 
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-            <div className="rounded-lg border border-[#8899aa]/20 bg-[#1e2a38]/70 p-5">
-              <Clock className="h-6 w-6 text-[#c9a84c]" />
-              <h2 className="mt-4 text-lg font-semibold">Quick response</h2>
-              <p className="mt-2 text-sm leading-6 text-[#aab6c3]">
-                We review every project request and reply with clear next steps.
+          <h1 className="mt-5 font-display text-5xl leading-[1.04] font-medium tracking-tight text-balance sm:text-6xl">
+            Show us your store.{" "}
+            <span className="marked">We&apos;ll itemize the upside.</span>
+          </h1>
+
+          <p className="mt-7 max-w-md leading-relaxed text-graphite">
+            Tell us where you think you&apos;re losing sales — or let us find
+            out. We&apos;ll audit your design, cart flow, and campaigns, then
+            reply with what each fix is worth.
+          </p>
+
+          <div className="mt-10 flex flex-col gap-5 border-t-2 border-ink pt-6">
+            <div>
+              <Clock className="h-5 w-5 text-stamp" aria-hidden />
+              <h2 className="mt-2 font-display text-lg font-semibold">
+                Reply within 24 hours
+              </h2>
+              <p className="mt-1 text-sm leading-relaxed text-graphite">
+                Every request gets a real review — with clear next steps.
               </p>
             </div>
-
-            <div className="rounded-lg border border-[#8899aa]/20 bg-[#1e2a38]/70 p-5">
-              <Mail className="h-6 w-6 text-[#c9a84c]" />
-              <h2 className="mt-4 text-lg font-semibold">Project fit first</h2>
-              <p className="mt-2 text-sm leading-6 text-[#aab6c3]">
-                No pressure. We start by understanding the goal, scope, and
-                timeline.
+            <div>
+              <Mail className="h-5 w-5 text-stamp" aria-hidden />
+              <h2 className="mt-2 font-display text-lg font-semibold">
+                No pressure, ever
+              </h2>
+              <p className="mt-1 text-sm leading-relaxed text-graphite">
+                If we&apos;re not the right fit for your store, we&apos;ll say
+                so.
               </p>
             </div>
           </div>
@@ -136,8 +143,21 @@ export default function ContactPage() {
 
         <form
           onSubmit={handleSubmit}
-          className="rounded-lg border border-[#8899aa]/20 bg-[#111f30] p-5 shadow-2xl shadow-black/20 md:p-8"
+          className="relative bg-white p-6 shadow-[0_24px_64px_-28px_rgb(26_24_20/0.35)] ring-1 ring-ink/10 md:p-9"
         >
+          <Stamp className="absolute -top-3 right-6 rotate-[3deg] bg-white">
+            Audit request
+          </Stamp>
+
+          <div className="mb-8 border-b border-dashed border-ink/25 pb-5">
+            <h2 className="font-display text-2xl font-medium">
+              Project details
+            </h2>
+            <p className="mt-1 font-mono text-[11px] tracking-wider text-graphite uppercase">
+              Takes about two minutes
+            </p>
+          </div>
+
           <div className="grid gap-5 md:grid-cols-2">
             <Field label="Name" htmlFor="name" required>
               <Input
@@ -147,11 +167,12 @@ export default function ContactPage() {
                 onChange={(event) => updateField("name", event.target.value)}
                 autoComplete="name"
                 placeholder="Your name"
+                className={inputClasses}
                 required
               />
             </Field>
 
-            <Field label="Business name" htmlFor="businessName" required>
+            <Field label="Store or brand" htmlFor="businessName" required>
               <Input
                 id="businessName"
                 name="businessName"
@@ -160,7 +181,8 @@ export default function ContactPage() {
                   updateField("businessName", event.target.value)
                 }
                 autoComplete="organization"
-                placeholder="Company or brand"
+                placeholder="yourstore.com"
+                className={inputClasses}
                 required
               />
             </Field>
@@ -173,7 +195,8 @@ export default function ContactPage() {
                 value={form.email}
                 onChange={(event) => updateField("email", event.target.value)}
                 autoComplete="email"
-                placeholder="you@example.com"
+                placeholder="you@yourbrand.com"
+                className={inputClasses}
                 required
               />
             </Field>
@@ -187,10 +210,11 @@ export default function ContactPage() {
                 onChange={(event) => updateField("phone", event.target.value)}
                 autoComplete="tel"
                 placeholder="Optional"
+                className={inputClasses}
               />
             </Field>
 
-            <Field label="Industry" htmlFor="industry" required>
+            <Field label="Vertical" htmlFor="industry" required>
               <Select
                 id="industry"
                 name="industry"
@@ -198,7 +222,7 @@ export default function ContactPage() {
                 onChange={(value) => updateField("industry", value)}
                 required
               >
-                <option value="">Choose an industry</option>
+                <option value="">Choose your niche</option>
                 {industries.map((industry) => (
                   <option key={industry} value={industry}>
                     {industry}
@@ -225,24 +249,29 @@ export default function ContactPage() {
             </Field>
           </div>
 
-          <Field label="Project details" htmlFor="message" required className="mt-5">
+          <Field
+            label="What are you building, fixing, or improving?"
+            htmlFor="message"
+            required
+            className="mt-5"
+          >
             <textarea
               id="message"
               name="message"
               value={form.message}
               onChange={(event) => updateField("message", event.target.value)}
-              className="min-h-36 w-full resize-y rounded-md border border-[#8899aa]/20 bg-gray-50 px-3 py-3 text-sm text-black shadow-input placeholder:text-neutral-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a84c] dark:bg-zinc-800 dark:text-white"
-              placeholder="What are you building, fixing, or improving?"
+              className={`${inputClasses} h-auto min-h-32 resize-y py-3`}
+              placeholder="e.g. Traffic is fine but most carts get abandoned before checkout…"
               required
             />
           </Field>
 
           {feedback ? (
             <div
-              className={`mt-5 flex items-start gap-3 rounded-lg border px-4 py-3 text-sm ${
+              className={`mt-6 flex items-start gap-3 px-4 py-3 text-sm ${
                 status === "success"
-                  ? "border-emerald-400/30 bg-emerald-400/10 text-emerald-100"
-                  : "border-red-400/30 bg-red-400/10 text-red-100"
+                  ? "bg-ledger/10 text-ledger ring-1 ring-ledger/30"
+                  : "bg-stamp/10 text-stamp ring-1 ring-stamp/30"
               }`}
               role="status"
             >
@@ -258,15 +287,17 @@ export default function ContactPage() {
           <button
             type="submit"
             disabled={isSending}
-            className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#c9a84c] px-6 py-4 font-semibold text-[#0d1b2a] transition hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100 sm:w-auto"
+            className="group mt-8 inline-flex w-full items-center justify-center gap-2.5 bg-ink px-8 py-4 font-semibold text-paper transition-transform duration-200 hover:-translate-y-0.5 disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
           >
             {isSending ? (
               <Loader2 className="h-4 w-4 animate-spin" />
             ) : (
               <Send className="h-4 w-4" />
             )}
-            {isSending ? "Sending..." : "Send message"}
-            {!isSending ? <ArrowRight className="h-4 w-4" /> : null}
+            {isSending ? "Sending..." : "Request my free audit"}
+            {!isSending ? (
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            ) : null}
           </button>
         </form>
       </section>
@@ -289,9 +320,9 @@ function Field({
 }) {
   return (
     <div className={className}>
-      <Label htmlFor={htmlFor} className="mb-2 block text-[#f5f0e8]">
+      <Label htmlFor={htmlFor} className="mb-2 block font-mono text-xs tracking-wide text-ink">
         {label}
-        {required ? <span className="text-[#c9a84c]"> *</span> : null}
+        {required ? <span className="text-stamp"> *</span> : null}
       </Label>
       {children}
     </div>
@@ -320,7 +351,7 @@ function Select({
       value={value}
       onChange={(event) => onChange(event.target.value)}
       required={required}
-      className="h-10 w-full rounded-md border border-[#8899aa]/20 bg-gray-50 px-3 py-2 text-sm text-black shadow-input focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a84c] dark:bg-zinc-800 dark:text-white"
+      className={`${inputClasses} appearance-none`}
     >
       {children}
     </select>

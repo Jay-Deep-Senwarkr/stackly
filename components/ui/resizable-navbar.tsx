@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import {
@@ -100,8 +101,10 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         minWidth: "800px",
       }}
       className={cn(
-        "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full px-4 py-2 lg:flex",
-        visible && "bg-[#0d1b2a]/90",
+        "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start border border-transparent px-5 py-3 lg:flex",
+        visible
+          ? "border-ink/15 bg-paper/90 shadow-[0_12px_36px_-16px_rgb(26_24_20/0.35)] backdrop-blur-md"
+          : "bg-transparent",
         className,
       )}>
       {children}
@@ -116,23 +119,23 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
     <motion.div
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-2",
+        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-1 text-sm font-medium lg:flex",
         className,
       )}>
       {items.map((item, idx) => (
         <a
           onMouseEnter={() => setHovered(idx)}
           onClick={onItemClick}
-          className="group relative px-4 py-2 text-[#f5f0e8]"
+          className="group relative px-4 py-2 text-ink/75"
           key={`link-${idx}`}
           href={item.link}>
           {hovered === idx && (
             <motion.div
               layoutId="hovered"
-              className="absolute inset-0 h-full w-full rounded-full bg-[#F5F0E8] dark:bg-neutral-800"
+              className="absolute inset-0 h-full w-full border-b-2 border-stamp bg-ink/[0.04]"
             />
           )}
-          <span className="relative z-20 transition-colors duration-300 group-hover:text-[#0d1b2a]">
+          <span className="relative z-20 transition-colors duration-300 group-hover:text-ink">
             {item.name}
           </span>
         </a>
@@ -162,7 +165,9 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
       }}
       className={cn(
         "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between px-0 py-2 lg:hidden",
-        visible && "bg-[#0d1b2a]/90",
+        visible
+          ? "border border-ink/15 bg-paper/95 shadow-[0_12px_36px_-16px_rgb(26_24_20/0.35)] backdrop-blur-md"
+          : "bg-transparent",
         className,
       )}>
       {children}
@@ -199,7 +204,7 @@ export const MobileNavMenu = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className={cn(
-            "absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-lg bg-[#0d1b2a] px-4 py-8 shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] dark:bg-neutral-950",
+            "absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-5 border border-ink/15 bg-paper px-6 py-8 shadow-[0_24px_60px_-20px_rgb(26_24_20/0.4)]",
             className,
           )}>
           {children}
@@ -217,22 +222,22 @@ export const MobileNavToggle = ({
   onClick: () => void;
 }) => {
   return isOpen ? (
-    <IconX className="text-[#f5f0e8]" onClick={onClick} />
+    <IconX className="text-ink" onClick={onClick} />
   ) : (
-    <IconMenu2 className="not-first:text-[#f5f0e8]" onClick={onClick} />
+    <IconMenu2 className="text-ink" onClick={onClick} />
   );
 };
 
 export const NavbarLogo = () => {
   return (
-    <a
-      href="#"
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black">
-      <img src="/logo.svg" alt="logo" width={30} height={30} />
-      <span className="font-medium text-white dark:text-white tracking-widest">
+    <Link
+      href="/"
+      className="relative z-20 mr-4 flex items-baseline gap-1.5 px-2 py-1">
+      <span className="font-display text-2xl font-semibold tracking-tight text-ink">
         Stackly
       </span>
-    </a>
+      <span className="font-display text-xl italic text-graphite">&amp; Co.</span>
+    </Link>
   );
 };
 

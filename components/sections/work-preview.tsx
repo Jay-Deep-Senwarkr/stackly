@@ -1,82 +1,123 @@
-"use client";
+import Link from "next/link";
+import { ArrowRight, TrendingUp } from "lucide-react";
+import Reveal, { SectionHeading } from "@/components/ui/reveal";
 
-import { CometCard } from "@/components/ui/comet-card";
-
-const projects = [
+const caseStudies = [
   {
-    title: "DevEvent",
-    category: "Events Platform",
+    title: "Velour Skin",
+    category: "DTC Skincare",
     description:
-      "A hub for developers to discover hackathons, meetups, and conferences in one place.",
+      "Full storefront redesign with editorial product storytelling and a streamlined checkout.",
+    metric: "+41%",
+    metricLabel: "conversion rate",
     image:
-      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=1200&auto=format&fit=crop",
   },
   {
-    title: "Podcaster",
-    category: "Media Platform",
+    title: "Atlas Gear Co.",
+    category: "Outdoor & Travel Gear",
     description:
-      "A modern podcasting platform built for creators who want their content to look as good as it sounds.",
+      "Speed overhaul and mobile-first catalog UX for a fast-growing adventure brand.",
+    metric: "+38%",
+    metricLabel: "revenue per visitor",
     image:
-      "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1526406915894-7bcd65f60845?q=80&w=1200&auto=format&fit=crop",
   },
   {
-    title: "Gym Site",
-    category: "Fitness Website",
+    title: "Maison Noir",
+    category: "Fashion Boutique",
     description:
-      "A fitness brand website designed to convert visitors into members with strong CTAs.",
+      "A luxury lookbook-style shopping experience with look-to-cart flows and refined PDPs.",
+    metric: "+64%",
+    metricLabel: "mobile sales",
     image:
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    title: "Fern & Field",
+    category: "Home Goods",
+    description:
+      "Cart recovery flows and email campaigns that brought window-shoppers back to checkout.",
+    metric: "$28k",
+    metricLabel: "carts recovered / qtr",
+    image:
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop",
   },
 ];
 
 export default function WorkPreview() {
   return (
-    <section className="min-h-screen bg-[#1e2a38] py-24">
+    <section className="py-24">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="mx-auto mb-20 max-w-3xl text-center">
-          <span className="inline-block rounded-full border border-[#8899aa]/20 bg-[#0d1b2a]/60 px-4 py-2 text-sm font-medium text-[#c9a84c]">
-            Recent Work
-          </span>
+        <SectionHeading
+          eyebrow="Client receipts"
+          title="Redesigns measured in"
+          accent="revenue"
+          description="Real stores, real numbers — the kind you can take to the bank."
+        />
 
-          <h2 className="mt-6 text-4xl font-bold text-[#f5f0e8] md:text-5xl">
-            A few things we&apos;ve built
-          </h2>
+        <div className="mt-16 grid gap-8 sm:grid-cols-2 xl:grid-cols-4">
+          {caseStudies.map((project, i) => (
+            <Reveal key={project.title} delay={(i % 4) * 0.07}>
+              <article className="group relative flex h-full flex-col bg-white ring-1 ring-ink/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_48px_-24px_rgb(26_24_20/0.35)]">
+                {/* hang-tag punch */}
+                <div
+                  aria-hidden
+                  className="absolute -top-2 left-6 h-4 w-4 rounded-full bg-paper ring-1 ring-ink/15"
+                />
 
-          <p className="mt-6 text-lg text-[#8899aa]">
-            A mix of platforms, products, and business websites - all built with
-            performance, usability, and growth in mind.
-          </p>
-        </div>
-
-        <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-3">
-          {projects.map((project) => (
-            <CometCard key={project.title}>
-              <div className="group flex h-full flex-col rounded-3xl border border-[#8899aa]/10 bg-[#0d1b2a] p-4">
-                <div className="relative overflow-hidden rounded-2xl">
+                <div className="relative overflow-hidden border-b border-ink/10">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={project.image}
-                    alt={project.title}
-                    className="h-72 w-full object-cover transition duration-500 group-hover:scale-105"
+                    alt={`${project.title} — ${project.category}`}
+                    loading="lazy"
+                    className="h-52 w-full object-cover transition duration-700 group-hover:scale-[1.05]"
                   />
                 </div>
 
-                <div className="flex flex-1 flex-col p-4">
-                  <p className="text-sm font-medium text-[#c9a84c]">
+                <div className="flex flex-1 flex-col p-6">
+                  <p className="font-mono text-[10px] font-bold tracking-[0.25em] text-graphite uppercase">
                     {project.category}
                   </p>
 
-                  <h3 className="mt-2 text-2xl font-semibold text-[#f5f0e8]">
+                  <h3 className="mt-2 font-display text-2xl font-medium">
                     {project.title}
                   </h3>
 
-                  <p className="mt-4 flex-1 leading-relaxed text-[#8899aa]">
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-graphite">
                     {project.description}
                   </p>
+
+                  <p className="mt-5 flex items-baseline gap-2 border-t border-dashed border-ink/20 pt-4">
+                    <TrendingUp
+                      className="h-4 w-4 self-center text-ledger"
+                      aria-hidden
+                    />
+                    <span className="font-display text-xl font-semibold text-ledger">
+                      {project.metric}
+                    </span>
+                    <span className="font-mono text-[11px] tracking-wide text-graphite uppercase">
+                      {project.metricLabel}
+                    </span>
+                  </p>
                 </div>
-              </div>
-            </CometCard>
+              </article>
+            </Reveal>
           ))}
         </div>
+
+        <Reveal delay={0.15}>
+          <div className="mt-14 text-center">
+            <Link
+              href="/work"
+              className="group inline-flex items-center gap-2 border-b-2 border-ink/25 pb-1 font-semibold transition-colors hover:border-stamp hover:text-stamp"
+            >
+              All client receipts
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

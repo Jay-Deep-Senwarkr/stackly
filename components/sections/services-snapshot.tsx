@@ -1,75 +1,106 @@
-"use client";
-
-import { Building2, Code2, Globe } from "lucide-react";
-import { CardSpotlight } from "@/components/ui/card-spotlight";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import Reveal, { SectionHeading } from "@/components/ui/reveal";
+import { PerfSeam } from "@/components/ui/receipt";
 
 const services = [
   {
-    title: "Websites That Work",
+    sku: "DSN-01",
+    title: "Store Design & Redesign",
     description:
-      "Fast, mobile-first websites built to convert visitors into customers. No bloat, no templates - just clean code built around your business.",
-    icon: Globe,
+      "A storefront that looks like the brand your products deserve. We rebuild tired themes into premium, cohesive shopping experiences shoppers trust instantly.",
+    href: "/services",
   },
   {
-    title: "Web Apps & Portals",
+    sku: "CRT-02",
+    title: "Cart Recovery",
     description:
-      "Need something more than a website? We build custom web applications, dashboards, booking systems, and customer portals that help your business run smoother.",
-    icon: Code2,
+      "Abandoned carts aren't lost sales — they're pending ones. Recovery flows, exit moments, and reminder campaigns that bring shoppers back to finish what they started.",
+    href: "/services",
   },
   {
-    title: "Built for Your Industry",
+    sku: "MKT-03",
+    title: "Marketing Campaigns",
     description:
-      "We don't build generic sites. Whether you're running a restaurant, a gym, or a store - we build for how your customers actually use the web.",
-    icon: Building2,
+      "Launches, seasonal pushes, and email campaigns with the creative and landing pages built in — traffic campaigns designed to bring buyers, not just visitors.",
+    href: "/services",
+  },
+  {
+    sku: "SPD-04",
+    title: "Speed & Core Web Vitals",
+    description:
+      "Every extra second of load time costs sales. We engineer sub-second stores that rank higher on Google and keep mobile shoppers moving.",
+    href: "/services",
+  },
+  {
+    sku: "PDP-05",
+    title: "Product Pages That Sell",
+    description:
+      "Rich media, social proof, and persuasive layouts that answer objections before they're asked — built around how people actually decide to buy.",
+    href: "/services",
+  },
+  {
+    sku: "CHK-06",
+    title: "Checkout & Mobile UX",
+    description:
+      "Fewer steps, fewer drop-offs. Streamlined mobile-first checkout flows that recover abandoned carts at the last possible moment.",
+    href: "/services",
+  },
+  {
+    sku: "CRO-07",
+    title: "Conversion Rate Optimization",
+    description:
+      "We study how real visitors browse, then remove friction and sharpen every call-to-action — turning the traffic you already have into more revenue.",
+    href: "/services",
+  },
+  {
+    sku: "SEO-08",
+    title: "Traffic-Ready SEO Foundations",
+    description:
+      "Structured data, clean metadata, and performance baked in from day one — so your store gets found and stays competitive in search.",
+    href: "/services",
   },
 ];
 
 export default function ServicesSnapshot() {
   return (
-    <section className="relative flex min-h-screen items-center bg-[#0d1b2a] py-24 snap-start">
+    <section className="py-24">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="mx-auto mb-16 max-w-3xl text-center">
-          <span className="inline-block rounded-full border border-[#8899aa]/20 bg-[#1e2a38]/60 px-4 py-2 text-sm font-medium text-[#c9a84c] backdrop-blur-sm">
-            What We Do
-          </span>
+        <SectionHeading
+          eyebrow="Itemized"
+          title="Everything your store needs to"
+          accent="sell beautifully"
+          description="Design, recovery, campaigns, speed — itemized below, billed in results."
+        />
 
-          <h2 className="mt-6 text-4xl font-bold tracking-tight text-[#f5f0e8] md:text-5xl">
-            Websites built for real businesses
-          </h2>
-
-          <p className="mt-6 text-lg leading-relaxed text-[#8899aa]">
-            We create fast, modern digital experiences that help businesses look
-            credible, attract customers, and grow online.
-          </p>
-        </div>
-
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => {
-            const Icon = service.icon;
-
-            return (
-              <CardSpotlight
-                key={service.title}
-                className="h-full min-h-[320px] border-[#8899aa]/20 bg-[#1e2a38]"
-                color="#c9a84c"
+        <div className="mt-16 grid gap-x-10 gap-y-2 md:grid-cols-2">
+          {services.map((service, i) => (
+            <Reveal key={service.sku} delay={(i % 2) * 0.06}>
+              <Link
+                href={service.href}
+                className="group flex items-baseline gap-4 border-b border-dashed border-ink/20 py-6 transition-colors hover:border-stamp/50"
               >
-                <div className="relative z-20 flex h-full flex-col">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-[#c9a84c]/20 bg-[#c9a84c]/10">
-                    <Icon className="h-7 w-7 text-[#c9a84c]" />
-                  </div>
+                <span className="font-mono text-xs font-bold tracking-wider text-graphite transition-colors group-hover:text-stamp">
+                  {service.sku}
+                </span>
 
-                  <h3 className="mt-8 text-2xl font-semibold text-[#f5f0e8]">
-                    {service.title}
-                  </h3>
-
-                  <p className="mt-4 leading-relaxed text-[#8899aa]">
+                <span className="flex-1">
+                  <span className="flex items-center justify-between gap-3">
+                    <span className="font-display text-xl font-medium sm:text-2xl">
+                      {service.title}
+                    </span>
+                    <ArrowUpRight className="h-4 w-4 shrink-0 text-graphite opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-stamp group-hover:opacity-100" />
+                  </span>
+                  <span className="mt-2 block max-w-lg text-sm leading-relaxed text-graphite">
                     {service.description}
-                  </p>
-                </div>
-              </CardSpotlight>
-            );
-          })}
+                  </span>
+                </span>
+              </Link>
+            </Reveal>
+          ))}
         </div>
+
+        <PerfSeam className="mt-16" />
       </div>
     </section>
   );

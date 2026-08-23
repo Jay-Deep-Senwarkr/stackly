@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import {
   Navbar,
   NavBody,
@@ -13,10 +15,9 @@ import {
 } from "@/components/ui/resizable-navbar";
 
 const navItems = [
-  { name: "Home", link: "/" },
+  { name: "Services", link: "/services" },
+  { name: "Client receipts", link: "/work" },
   { name: "About", link: "/about" },
-  { name: "Work", link: "/work" },
-  { name: "Contact", link: "/contact" },
 ];
 
 export default function NavbarWrapper() {
@@ -24,31 +25,48 @@ export default function NavbarWrapper() {
 
   return (
     <Navbar>
-      {/* Desktop Navbar */}
+      {/* Desktop */}
       <NavBody>
         <NavbarLogo />
         <NavItems items={navItems} />
+        <div className="relative z-20 flex items-center gap-4">
+          <Link
+            href="/contact"
+            className="hidden text-sm font-medium text-ink/70 transition-colors hover:text-ink md:block"
+          >
+            Contact
+          </Link>
+          <Link
+            href="/contact"
+            className="group inline-flex items-center gap-2 bg-ink px-5 py-2.5 text-sm font-semibold text-paper transition-transform duration-200 hover:-translate-y-0.5"
+          >
+            Free audit
+            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+          </Link>
+        </div>
       </NavBody>
 
-      {/* Mobile Navbar */}
+      {/* Mobile */}
       <MobileNav>
         <MobileNavHeader>
           <NavbarLogo />
-          <MobileNavToggle
-            isOpen={isOpen}
-            onClick={() => setIsOpen(!isOpen)}
-          />
+          <div className="flex items-center gap-3">
+            <Link
+              href="/contact"
+              className="bg-ink px-4 py-2 text-xs font-semibold text-paper sm:text-sm"
+            >
+              Free audit
+            </Link>
+            <MobileNavToggle isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
+          </div>
         </MobileNavHeader>
 
-        <MobileNavMenu
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-        >
-          {navItems.map((item) => (
+        <MobileNavMenu isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          {[...navItems, { name: "Contact", link: "/contact" }].map((item) => (
             <a
               key={item.name}
               href={item.link}
-              className="text-[#f5f0e8] hover:text-[#c9a84c] transition-colors"
+              className="font-display text-2xl text-ink transition-colors hover:text-stamp"
               onClick={() => setIsOpen(false)}
             >
               {item.name}
